@@ -1,0 +1,17 @@
+[Unit]
+Description=leader-guard — protect a Solana validator's leader windows
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/leader-guard.env
+ExecStart=/usr/local/bin/leader-guard.sh
+Restart=always
+RestartSec=3
+Nice=-10
+IOSchedulingClass=realtime
+IOSchedulingPriority=0
+
+[Install]
+WantedBy=multi-user.target
